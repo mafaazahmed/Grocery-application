@@ -6,12 +6,6 @@ const ProductCard = ({ product }) => {
   const { currency, addToCart, removeFromCart, cartItems, navigate } =
     useAppContext();
 
-  const [selectedWeight, setSelectedWeight] = useState("250gm");
-
-  const handleWeightChange = (e) => {
-    setSelectedWeight(e.target.value);
-  };
-
   return (
     product && (
       <div
@@ -19,7 +13,7 @@ const ProductCard = ({ product }) => {
           navigate(`/products/${product.category.toLowerCase()}/${product._id}`);
           scrollTo(0, 0);
         }}
-        className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full"
+        className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full"
       >
         {/* Image */}
         <div className="group cursor-pointer flex items-center justify-center px-2">
@@ -32,26 +26,6 @@ const ProductCard = ({ product }) => {
 
         <div className="text-gray-500/60 text-sm">
           <p>{product.category}</p>
-
-          {/* Name & Weight Selector in one line */}
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-gray-700 font-medium text-lg truncate">
-              {product.name}
-            </p>
-            </div>
-            {/* <select
-              value={selectedWeight}
-              onChange={handleWeightChange}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-primary/10 border border-primary/40 rounded h-[34px] px-2 text-primary cursor-pointer text-sm outline-none focus:ring-0"
-            >
-              <option value="250gm">250gm</option>
-              <option value="500gm">500gm</option>
-              <option value="750gm">750gm</option>
-              <option value="1kg">1kg</option>
-            </select> */}
-          
-
           Ratings
           <div className="flex items-center gap-0.5 mt-1">
             {Array(5)
@@ -66,8 +40,6 @@ const ProductCard = ({ product }) => {
               ))}
             <p>(4)</p>
           </div>
-
-          {/* Price & Quantity Selector */}
           <div className="flex items-end justify-between mt-3">
             <p className="md:text-xl text-base font-medium text-primary">
               {currency}
@@ -77,10 +49,7 @@ const ProductCard = ({ product }) => {
                 {product.price}
               </span>
             </p>
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="text-primary"
-            >
+           <div className="text-primary">
               {!cartItems[product._id] ? (
                 <button
                   className="flex items-center justify-center gap-1 bg-primary/10 border border-primary/40 md:w-[80px] w-[64px] h-[34px] rounded cursor-pointer"
@@ -89,7 +58,7 @@ const ProductCard = ({ product }) => {
                   <img src={assets.cart_icon} alt="cart_icon" />
                   Add
                 </button>
-              ) : (
+              ): (
                 <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-primary/25 rounded select-none">
                   <button
                     onClick={() => removeFromCart(product._id)}
@@ -108,7 +77,7 @@ const ProductCard = ({ product }) => {
                   </button>
                 </div>
               )}
-            </div>
+           </div> 
           </div>
         </div>
       </div>
